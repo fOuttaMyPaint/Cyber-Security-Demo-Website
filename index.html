@@ -2,9 +2,14 @@ import requests
 import threading
 import time
 import signal
+from dotenv import load_dotenv
+import os
 
-# Target URL
-target_url = "https://fOuttaMyPaint.github.io/Cyber-Security-Demo-Website"  # Replace with your GitHub Pages URL
+# Load environment variables from .env file
+load_dotenv()
+
+# Target URL from environment variable
+target_url = os.getenv("TARGET_URL")
 
 # Tor proxy settings
 proxies = {
