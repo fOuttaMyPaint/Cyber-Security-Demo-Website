@@ -1,5 +1,12 @@
+@font-face {
+    font-family: 'Honk';
+    src: url('Honk-Regular-VariableFont_MORF,SHLN.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Honk', Arial, sans-serif;
     margin: 20px;
     background-color: #f4f4f4;
     color: #333;
