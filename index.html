@@ -4,15 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Website</title>
-    <style>
-        #log {
-            border: 1px solid #ddd;
-            padding: 10px;
-            max-height: 300px;
-            overflow-y: scroll;
-            background: #f9f9f9;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>Welcome to the Demo Website</h1>
@@ -20,7 +13,11 @@
     
     <h2>Incoming Requests Log</h2>
     <div id="log"></div>
+    <button onclick="clearLogs()">Clear Logs</button>
     
+    <h2>Request Statistics</h2>
+    <canvas id="requestChart" width="400" height="200"></canvas>
+
     <script src="log.js"></script>
 </body>
 </html>
